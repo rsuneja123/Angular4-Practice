@@ -1,0 +1,31 @@
+<div class="block">
+  <h1>Product list</h1>
+  <div>
+    <label>Filter By:</label>
+    <input type="text" [(ngModel)]="filter" /><button type="button" (click)="carFilter()">Car</button>
+  </div>
+  <div>
+    <p>Filter By->{{filter}}</p>
+  </div>
+</div>
+
+<table *ngIf="Prod && Prod.length" >
+  
+  <tr>
+    <th><button type="button" (click)="toggleImage()">{{showImage?'Hide':'Show'}} Image</button></th>
+    <th>Product</th>
+    <th>Avalaible</th>
+    <th>Code</th>
+    <th>Rate</th>
+    <th>starRating</th>
+  </tr>
+  <tr *ngFor="let pro of Prod | newFilter:filter">
+    <th><img *ngIf="showImage" src="./assets/{{pro.imageUrl}}" [style.width.px]="imgWidth"/></th>
+    <th><a [routerLink]="['/products',pro.productId]">{{pro.Product}} </a> </th>
+    <th>{{pro.Available}}</th>
+    <th>{{pro.Code}}</th>
+    <th>{{pro.Rate}}</th>
+    <th><app-star [rating]="pro.starRating"></app-star></th>
+  </tr>
+
+</table>
